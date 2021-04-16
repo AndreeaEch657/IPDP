@@ -113,5 +113,11 @@ namespace CyberShop.Web.Controllers
 
 
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return Redirect("/");
+        }
     }
 }

@@ -69,9 +69,9 @@ export const SignIn: React.FunctionComponent<any> = () => {
 
         AccountService.singIn(data)
             .then(resp => {
-                console.log(data);
+                console.log(resp);
                 //console.log(resp.data);
-                window.location.assign("/");
+                //window.location.assign("/");
                 setIsFeedbackLoading(false);
 
             })
@@ -222,7 +222,7 @@ export const SignIn: React.FunctionComponent<any> = () => {
 
 
                 <Grid item>
-            <Link href="#" variant="body2">
+            <Link href="#" variant="body2" onClick = {() => {window.location.href = '../Account/Register'}}>
               {"Don't have an account? Sign Up"}
             </Link>
           </Grid>

@@ -89,11 +89,8 @@ namespace CyberShop.Domain.Logic.Services
         public async Task<string> AddUser(AppUserDM model)
         {
             var newAppUser = MapToEf(model);
-            var newPassword = RandomPassword(10);
 
-
-
-            var result = await _userManager.CreateAsync(newAppUser, newPassword);
+            var result = await _userManager.CreateAsync(newAppUser, model.Password);
 
             if (result.Succeeded)
             {
