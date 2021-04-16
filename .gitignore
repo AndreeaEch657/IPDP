@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+
+CyberShop.Web.Client/dist/
+/CyberShop.Web/wwwroot/Scripts/App
+CyberShop.Web/wwwroot/
+

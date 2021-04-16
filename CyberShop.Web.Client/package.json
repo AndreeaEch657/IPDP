@@ -1,0 +1,84 @@
+{
+  "name": "cyber-shop.web.client",
+  "version": "0.0.0",
+  "description": "CyberShop.Web.Client",
+  "mode": "development",
+  "main": "main.js",
+  "scripts": {
+    "build-dev": "webpack --mode development",
+    "build-prod": "webpack --mode production",
+    "dev-watch": "webpack --watch"
+  },
+  "author": {
+    "name": "ey"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "@material-ui/styles": "4.11.3",
+    "@types/react": "16.8.4",
+    "@types/react-dom": "16.8.2",
+    "axios": "0.21.1",
+    "bootstrap": "^4.6.0",
+    "classnames": "^2.3.1",
+    "core-js": "3.10.1",
+    "es6-promise": "4.2.8",
+    "localforage": "1.9.0",
+    "moment": "2.29.1",
+    "npm-check-updates": "^11.4.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-google-invisible-recaptcha": "^0.2.11",
+    "react-google-recaptcha": "^2.1.0",
+    "react-router-dom": "5.2.0",
+    "react-select": "^4.3.0",
+    "styled-components-grid": "^2.2.2",
+    "typescript": "^4.2.4"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "10"
+          }
+        }
+      ],
+      "@babel/preset-react"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "7.13.15",
+    "@babel/plugin-transform-arrow-functions": "^7.13.0",
+    "@babel/polyfill": "7.2.5",
+    "@babel/preset-env": "7.13.15",
+    "@babel/preset-react": "7.13.13",
+    "@teamsupercell/typings-for-css-modules-loader": "^2.5.1",
+    "@types/jest": "26.0.22",
+    "@types/node": "14.14.37",
+    "@types/react": "17.0.3",
+    "@types/react-dom": "17.0.3",
+    "@types/react-redux": "7.1.16",
+    "@types/react-router-dom": "5.1.7",
+    "@types/redux-logger": "3.0.8",
+    "@types/webpack-env": "1.16.0",
+    "babel-loader": "8.2.2",
+    "babel-polyfill": "^6.26.0",
+    "css-loader": "5.2.1",
+    "eslint-plugin-react": "7.23.2",
+    "gulp": "4.0.2",
+    "style-loader": "2.0.0",
+    "typings-for-css-modules-loader": "^1.7.0",
+    "webpack": "5.32.0",
+    "webpack-bundle-analyzer": "4.4.1",
+    "webpack-cli": "4.6.0"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
