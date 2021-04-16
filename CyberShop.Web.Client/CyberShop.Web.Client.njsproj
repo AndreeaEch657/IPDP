@@ -30,9 +30,21 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="obj\Debug\CyberShop.Web.Client.njsproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Debug\CyberShop.Web.Client.njsproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\CyberShop.Web.Client.njsprojAssemblyReference.cache" />
+    <Content Include="package-lock.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="tsconfig.json" />
+    <Content Include="webpack.config.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="app\" />
+    <Folder Include="bin\" />
+    <Folder Include="dist\" />
+    <Folder Include="obj\" />
+    <Folder Include="obj\Debug\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>
