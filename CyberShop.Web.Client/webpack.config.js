@@ -7,7 +7,7 @@ module.exports = {
 
     // File(s) to target in the 'build' directory
     entry: {
-        //appBundle: "./dist/app/main.js",
+        appBundle: "./dist/app/UI/Areas/Main/index.js",
         loginBundle: "./dist/app/UI/Account/SignIn.js",
         registerBundle: "./dist/app/UI/Account/Register.js"
         //forgotPasswordBundle: "./dist/app/UI/Account/ForgotPassword.js",

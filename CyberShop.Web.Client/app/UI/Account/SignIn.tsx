@@ -71,7 +71,7 @@ export const SignIn: React.FunctionComponent<any> = () => {
             .then(resp => {
                 console.log(resp);
                 //console.log(resp.data);
-                //window.location.assign("/");
+                window.location.assign("/");
                 setIsFeedbackLoading(false);
 
             })
