@@ -4,14 +4,16 @@ using CyberShop.Data.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CyberShop.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210421154705_AddItems")]
+    partial class AddItems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,56 +92,6 @@ namespace CyberShop.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("CyberShop.Data.EFModels.ShopItem", b =>
-                {
-                    b.Property<Guid>("ShopItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("shop_item_id");
-
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("category");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("description");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float")
-                        .HasColumnName("price");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("title");
-
-                    b.HasKey("ShopItemId");
-
-                    b.ToTable("ShopItems");
-                });
-
-            modelBuilder.Entity("CyberShop.Data.EFModels.ShopItemImage", b =>
-                {
-                    b.Property<Guid>("ImageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("image_id");
-
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)")
-                        .HasColumnName("image");
-
-                    b.Property<Guid>("ShopItemId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("shop_item_id");
-
-                    b.HasKey("ImageId");
-
-                    b.HasIndex("ShopItemId");
-
-                    b.ToTable("ShopItemsImages");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -273,17 +225,6 @@ namespace CyberShop.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("CyberShop.Data.EFModels.ShopItemImage", b =>
-                {
-                    b.HasOne("CyberShop.Data.EFModels.ShopItem", "ShopItem")
-                        .WithMany("Images")
-                        .HasForeignKey("ShopItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ShopItem");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -333,11 +274,6 @@ namespace CyberShop.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("CyberShop.Data.EFModels.ShopItem", b =>
-                {
-                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }
