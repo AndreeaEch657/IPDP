@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import ReCAPTCHA from "react-google-recaptcha";
 import AccountService from "../../Services/AccountService";
-import { CircularProgress, Grid } from '@material-ui/core';
+import { CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid } from '@material-ui/core';
 import {render} from 'react-dom';
 
 
@@ -43,9 +43,49 @@ export const SignIn: React.FunctionComponent<any> = () => {
         errorMessage: ""
     });
     const [tokenValue, setTokenValue] = React.useState('');
+    const [open, setOpen] = React.useState(false);
+
 
     const handleChange = (event) => {
         setValues({ ...values, [event.target.name]: event.target.value });
+    };
+
+    const circularFeedback = () => {
+        if (isFeedbackLoading)
+            return (
+                <div>
+                    <CircularProgress />
+
+                </div>
+            );
+    }
+
+    const openDialog = () => {
+        return (
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Password reset"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        You have succesfully created an account.
+          </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                        Login
+          </Button>
+
+                </DialogActions>
+            </Dialog>
+        )
+    }
+    const handleClose = () => {
+        setOpen(false);
+        window.location.assign("/Account/Login");
     };
 
 
@@ -71,7 +111,7 @@ export const SignIn: React.FunctionComponent<any> = () => {
             .then(resp => {
                 console.log(resp);
                 //console.log(resp.data);
-                //window.location.assign("/");
+                window.location.assign("/");
                 setIsFeedbackLoading(false);
 
             })
@@ -99,15 +139,6 @@ export const SignIn: React.FunctionComponent<any> = () => {
         window.location.assign("/Account/ForgotPassword")
     }
 
-    const circularFeedback = () => {
-        if (isFeedbackLoading)
-            return (
-                <div className={classes.root}>
-                    <CircularProgress />
-
-                </div>
-            );
-    }
 
     const onChange = (value) => {
         (recaptchaRef.current as any).reset();
@@ -219,6 +250,8 @@ export const SignIn: React.FunctionComponent<any> = () => {
                 {circularFeedback()}
 
                 {renderButtons()}
+
+                {openDialog()}
 
 
                 <Grid item>

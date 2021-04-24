@@ -10,15 +10,22 @@ namespace CyberShop.Data.DBContext
 {
     public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
+
+        public DbSet<ShopItem> ShopItems;
+        public DbSet<ShopItemImage> ShopItemImages;
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
 
+        
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new AppUserConfiguration());
+            builder.ApplyConfiguration(new ShopItemConfiguration());
+            builder.ApplyConfiguration(new ShopItemImageConfiguration());
         }
     }
 }
