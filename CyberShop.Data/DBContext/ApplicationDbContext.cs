@@ -11,14 +11,15 @@ namespace CyberShop.Data.DBContext
     public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
 
-        public DbSet<ShopItem> ShopItems;
-        public DbSet<ShopItemImage> ShopItemImages;
+       
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
+        public DbSet<ShopItem> ShopItems { get; set; }
+        public DbSet<ShopItemImage> ShopItemImages { get; set; }
 
-        
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
