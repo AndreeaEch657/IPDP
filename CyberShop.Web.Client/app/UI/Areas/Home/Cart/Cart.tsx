@@ -1,6 +1,6 @@
 import CartItem from '../CartItem/CartItem';
 import { Wrapper } from './Cart.styles';
-import { CartItemType } from '../App';
+import { CartItemType } from '../HomePage';
 import * as React from 'react';
 
 type Props = {

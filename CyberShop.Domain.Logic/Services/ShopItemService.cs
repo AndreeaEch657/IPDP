@@ -30,7 +30,7 @@ namespace CyberShop.Domain.Logic.Services
             });
         }
 
-        public IEnumerable<ShopItemImageDM> GetImagesForItem(Guid shopItemId)
+        public IEnumerable<ShopItemImageDM> GetImagesForItem(long shopItemId)
         {
             return _ctx.ShopItemImages
                 .Where(s => s.ShopItemId == shopItemId)
@@ -42,7 +42,7 @@ namespace CyberShop.Domain.Logic.Services
                 });
         }
 
-        public Guid AddShopItem(ShopItemDM model)
+        public long AddShopItem(ShopItemDM model)
         {
             _ctx.ShopItems.Add(new ShopItem
             {
@@ -56,7 +56,7 @@ namespace CyberShop.Domain.Logic.Services
             return model.ShopItemId;
         }
 
-        public Guid AddShopItemImage(ShopItemImageDM model)
+        public long AddShopItemImage(ShopItemImageDM model)
         {
             _ctx.ShopItemImages.Add(new ShopItemImage
             {

@@ -114,6 +114,13 @@ namespace CyberShop.Web.Controllers
 
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IEnumerable<AppUserDM> GetUsers()
+        {
+            return _userService.GetUsers();
+        }
+
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
