@@ -2,10 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CyberShop.Data.DBContext;
 using CyberShop.Data.EFModels;
 using CyberShop.Domain.Models.Infrastructure;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace CyberShop.Domain.Logic.Services
 {
@@ -18,31 +21,31 @@ namespace CyberShop.Domain.Logic.Services
             _ctx = ctx;
         }
 
-        public IEnumerable<ShopItemDM> GetAllShopItems()
+        public async Task<IEnumerable<ShopItemDM>> GetAllShopItems()
         {
-            return _ctx.ShopItems.Select(s => new ShopItemDM
+            return await _ctx.ShopItems.Select(s => new ShopItemDM
             {
                 Category = s.Category,
-                Description = s.Category,
+                Description = s.Description,
                 Price = s.Price,
                 ShopItemId = s.ShopItemId,
                 Title = s.Title
-            });
+            }).ToListAsync();
         }
 
-        public IEnumerable<ShopItemImageDM> GetImagesForItem(Guid shopItemId)
+        public async Task<IEnumerable<ShopItemImageDM>> GetImagesForItem(Guid shopItemId)
         {
-            return _ctx.ShopItemImages
+            return await _ctx.ShopItemImages
                 .Where(s => s.ShopItemId == shopItemId)
                 .Select(s => new ShopItemImageDM
                 {
                     Image = s.Image,
                     ImageId = s.ImageId,
                     ShopItemId = s.ShopItemId
-                });
+                }).ToListAsync();
         }
 
-        public Guid AddShopItem(ShopItemDM model)
+        public async Task<Guid> AddShopItem(ShopItemDM model)
         {
             _ctx.ShopItems.Add(new ShopItem
             {
@@ -52,19 +55,19 @@ namespace CyberShop.Domain.Logic.Services
                 ShopItemId = model.ShopItemId,
                 Title = model.Title,
             });
-            _ctx.SaveChanges();
+            await _ctx.SaveChangesAsync();
             return model.ShopItemId;
         }
 
-        public Guid AddShopItemImage(ShopItemImageDM model)
+        public async Task<Guid> AddShopItemImage(ShopItemImageDM model)
         {
             _ctx.ShopItemImages.Add(new ShopItemImage
             {
                 Image = model.Image,
-                ImageId = model.ImageId,
+                ImageId = Guid.NewGuid(),
                 ShopItemId = model.ShopItemId
             });
-            _ctx.SaveChanges();
+            await _ctx.SaveChangesAsync();
             return model.ShopItemId;
         }
     }
