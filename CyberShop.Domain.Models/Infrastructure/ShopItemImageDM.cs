@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Http;
 
 namespace CyberShop.Domain.Models.Infrastructure
 {
@@ -6,8 +7,7 @@ namespace CyberShop.Domain.Models.Infrastructure
     {
         
         public long ImageId { get; set; }
-        public byte[] Image { get; set; }
-
+        public string ImagePath { get; set; }
         public long ShopItemId { get; set; }
       
     }

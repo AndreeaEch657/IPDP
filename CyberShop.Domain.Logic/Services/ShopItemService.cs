@@ -2,47 +2,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CyberShop.Data.DBContext;
 using CyberShop.Data.EFModels;
 using CyberShop.Domain.Models.Infrastructure;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace CyberShop.Domain.Logic.Services
 {
     public class ShopItemService
     {
         private readonly ApplicationDbContext _ctx;
+        
 
         public ShopItemService(ApplicationDbContext ctx)
         {
             _ctx = ctx;
         }
 
-        public IEnumerable<ShopItemDM> GetAllShopItems()
+        public async Task<IEnumerable<ShopItemDM>> GetAllShopItems()
         {
-            return _ctx.ShopItems.Select(s => new ShopItemDM
+            return await _ctx.ShopItems.Select(s => new ShopItemDM
             {
                 Category = s.Category,
-                Description = s.Category,
+                Description = s.Description,
                 Price = s.Price,
                 ShopItemId = s.ShopItemId,
                 Title = s.Title
-            });
+            }).ToListAsync();
         }
 
-        public IEnumerable<ShopItemImageDM> GetImagesForItem(long shopItemId)
+        public async Task<IEnumerable<ShopItemImageDM>> GetImagesForItem(long shopItemId)
         {
-            return _ctx.ShopItemImages
+            return await _ctx.ShopItemImages
                 .Where(s => s.ShopItemId == shopItemId)
                 .Select(s => new ShopItemImageDM
                 {
-                    Image = s.Image,
+                    ImagePath = s.ImagePath,
                     ImageId = s.ImageId,
                     ShopItemId = s.ShopItemId
-                });
+                }).ToListAsync();
         }
 
-        public long AddShopItem(ShopItemDM model)
+        public async Task<long> AddShopItem(ShopItemDM model)
         {
             _ctx.ShopItems.Add(new ShopItem
             {
@@ -52,19 +56,21 @@ namespace CyberShop.Domain.Logic.Services
                 ShopItemId = model.ShopItemId,
                 Title = model.Title,
             });
-            _ctx.SaveChanges();
+            await _ctx.SaveChangesAsync();
             return model.ShopItemId;
         }
 
-        public long AddShopItemImage(ShopItemImageDM model)
+        public async Task <long> AddShopItemImage(ShopItemImageDM model)
         {
-            _ctx.ShopItemImages.Add(new ShopItemImage
+           
+
+            await _ctx.ShopItemImages.AddAsync(new ShopItemImage
             {
-                Image = model.Image,
-                ImageId = model.ImageId,
-                ShopItemId = model.ShopItemId
+                ImagePath = model.ImagePath,
+                ShopItemId = model.ShopItemId,
+                
             });
-            _ctx.SaveChanges();
+            await _ctx.SaveChangesAsync();
             return model.ShopItemId;
         }
     }
