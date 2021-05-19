@@ -16,7 +16,7 @@ import { EnhancedTableToolbar } from './EnhancedTableToolbar';
 import * as React from "react"
 
 interface Column {
-    id: 'id' | 'fullName' | 'email';
+    id: 'id' | 'fullName' | 'email' | 'status'; 
     label: string;
     minWidth?: number;
     align?: 'right';
@@ -26,7 +26,8 @@ interface Column {
 const columns: Column[] = [
     { id: 'fullName', label: 'Full Name', minWidth: 170 },
     { id: 'email', label: 'Email', minWidth: 100 },
-    { id: 'id', label: 'Id', minWidth: 170}
+    { id: 'id', label: 'Id', minWidth: 170},
+    { id: 'status', label: 'Status', minWidth: 170}
     
 
 ];
