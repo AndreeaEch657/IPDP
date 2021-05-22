@@ -6,7 +6,7 @@ namespace CyberShop.Data.EFModels
 {
     public class ShopItem
     {
-        public Guid ShopItemId { get; set; }
+        public long ShopItemId { get; set; }
         public string Title { get; set; }
         public string Category { get; set; }
         public string Description { get; set; }

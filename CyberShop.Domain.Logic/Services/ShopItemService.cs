@@ -15,6 +15,7 @@ namespace CyberShop.Domain.Logic.Services
     public class ShopItemService
     {
         private readonly ApplicationDbContext _ctx;
+        
 
         public ShopItemService(ApplicationDbContext ctx)
         {
@@ -33,19 +34,20 @@ namespace CyberShop.Domain.Logic.Services
             }).ToListAsync();
         }
 
-        public async Task<IEnumerable<ShopItemImageDM>> GetImagesForItem(Guid shopItemId)
+        public async Task<ShopItemImageDM> GetImageForItem(long shopItemId)
         {
-            return await _ctx.ShopItemImages
+            var list =  await _ctx.ShopItemImages
                 .Where(s => s.ShopItemId == shopItemId)
                 .Select(s => new ShopItemImageDM
                 {
-                    Image = s.Image,
+                    ImagePath = s.ImagePath,
                     ImageId = s.ImageId,
                     ShopItemId = s.ShopItemId
                 }).ToListAsync();
+            return list[0];
         }
 
-        public async Task<Guid> AddShopItem(ShopItemDM model)
+        public async Task<long> AddShopItem(ShopItemDM model)
         {
             _ctx.ShopItems.Add(new ShopItem
             {
@@ -59,16 +61,42 @@ namespace CyberShop.Domain.Logic.Services
             return model.ShopItemId;
         }
 
-        public async Task<Guid> AddShopItemImage(ShopItemImageDM model)
+        public async Task <long> AddShopItemImage(ShopItemImageDM model)
         {
-            _ctx.ShopItemImages.Add(new ShopItemImage
+           
+
+            await _ctx.ShopItemImages.AddAsync(new ShopItemImage
             {
-                Image = model.Image,
-                ImageId = Guid.NewGuid(),
-                ShopItemId = model.ShopItemId
+                ImagePath = model.ImagePath,
+                ShopItemId = model.ShopItemId,
+                
             });
             await _ctx.SaveChangesAsync();
             return model.ShopItemId;
         }
+
+        public async Task<IEnumerable<CompleteShopItem>> GetCompleteShopItems()
+        {
+            var shopItems = await GetAllShopItems();
+            List<CompleteShopItem> shopItemsList = new List<CompleteShopItem>();
+            foreach (var shopItem in shopItems)
+            {
+
+                shopItemsList.Add(new CompleteShopItem
+                {
+                    ShopItemId = shopItem.ShopItemId,
+                    Category =  shopItem.Category,
+                    Description =  shopItem.Description,
+                    Price = shopItem.Price,
+                    Title = shopItem.Title,
+                    ImagePath = (await GetImageForItem(shopItem.ShopItemId)).ImagePath
+                });
+            }
+
+            return shopItemsList;
+
+        } 
+
+
     }
 }

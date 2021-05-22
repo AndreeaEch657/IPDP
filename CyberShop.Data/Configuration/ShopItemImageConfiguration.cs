@@ -13,7 +13,7 @@ namespace CyberShop.Data.Configuration
 
             builder.Property(s => s.ImageId).HasColumnName("image_id");
             builder.Property(s => s.ShopItemId).HasColumnName("shop_item_id");
-            builder.Property(s => s.Image).HasColumnName("image");
+            builder.Property(s => s.ImagePath).HasColumnName("image_path");
 
             builder.HasOne<ShopItem>(s => s.ShopItem)
                 .WithMany(s => s.Images)

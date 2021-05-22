@@ -11,6 +11,7 @@ namespace CyberShop.Domain.Models.Core
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public  string Status { get; set; }
 
         //TODO: add the rest of the properties form thr app user EF model
     }

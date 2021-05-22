@@ -98,7 +98,7 @@ namespace CyberShop.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                var newUser = new AppUserDM { Id = Guid.NewGuid().ToString(), Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Password = model.Password};
+                var newUser = new AppUserDM { Id = Guid.NewGuid().ToString(), Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Password = model.Password, Status = "Active"};
                 var newRegisteredUserId = await _userService.AddUser(newUser);
                 if (newRegisteredUserId != null)
                 {
@@ -112,6 +112,13 @@ namespace CyberShop.Web.Controllers
             return BadRequest("Something bad happened, please try again");
 
 
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IEnumerable<AppUserDM> GetUsers()
+        {
+            return _userService.GetUsers();
         }
 
         public async Task<IActionResult> Logout()

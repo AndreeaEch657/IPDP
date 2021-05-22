@@ -1,17 +1,17 @@
 import Button from '@material-ui/core/Button';
 import * as React from 'react';
 // Types
-import { CartItemType } from '../App';
+import { ICartItem } from '../HomePage';
 // Styles
 import { Wrapper } from './CartItem.styles';
 
-type Props = {
-  item: CartItemType;
-  addToCart: (clickedItem: CartItemType) => void;
+interface CartItemProps {
+  item: ICartItem;
+  addToCart: (clickedItem: ICartItem) => void;
   removeFromCart: (id: number) => void;
 };
 
-const CartItem: React.FC<Props> = ({ item, addToCart, removeFromCart }) => (
+const CartItem: React.FC<CartItemProps> = ({ item, addToCart, removeFromCart }) => (
   <Wrapper>
     <div>
       <h3>{item.title}</h3>
@@ -24,7 +24,7 @@ const CartItem: React.FC<Props> = ({ item, addToCart, removeFromCart }) => (
           size='small'
           disableElevation
           variant='contained'
-          onClick={() => removeFromCart(item.id)}
+          onClick={() => removeFromCart(item.shopItemId)}
         >
           -
         </Button>
@@ -39,7 +39,7 @@ const CartItem: React.FC<Props> = ({ item, addToCart, removeFromCart }) => (
         </Button>
       </div>
     </div>
-    <img src={item.image} alt={item.title} />
+    <img src={item.imagePath} alt={item.title} />
   </Wrapper>
 );
 

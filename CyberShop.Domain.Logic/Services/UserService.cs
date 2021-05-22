@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CyberShop.Data.DBContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace CyberShop.Domain.Logic.Services
 {
@@ -14,11 +16,13 @@ namespace CyberShop.Domain.Logic.Services
         private readonly UserManager<AppUser> _userManager;
         private readonly ILogger<UserService> _logger;
         private static Random random = new Random();
+        private readonly ApplicationDbContext _dbContext;
 
-        public UserService(UserManager<AppUser> userManager, ILogger<UserService> logger)
+        public UserService(UserManager<AppUser> userManager, ILogger<UserService> logger, ApplicationDbContext dbContext)
         {
             _userManager = userManager;
             _logger = logger;
+            _dbContext = dbContext;
         }
 
         public IEnumerable<AppUserDM> GetUsers()
@@ -30,25 +34,10 @@ namespace CyberShop.Domain.Logic.Services
                 Email = u.Email,
                 LastName = u.LastName,
                 FirstName = u.FirstName,
+                Status = u.Status
             });
         }
 
-
-        public IEnumerable<AppUserDM> GetPointEligibleUsers()
-        {
-
-            return _userManager
-                .Users
-                //TODO: add eligible condition here
-                .Where(u => true)
-                .Select(u => new AppUserDM()
-                {
-                    Id = u.Id,
-                    Email = u.Email,
-                    LastName = u.LastName,
-                    FirstName = u.FirstName,
-                });
-        }
 
         private AppUserDM MapToDm(AppUser efModel)
         {
@@ -81,6 +70,7 @@ namespace CyberShop.Domain.Logic.Services
             newModel.FirstName = dmModel.FirstName;
             newModel.LastName = dmModel.LastName;
             newModel.Email = dmModel.Email;
+            newModel.Status = dmModel.Status;
 
             return newModel;
 
@@ -100,22 +90,17 @@ namespace CyberShop.Domain.Logic.Services
 
         }
 
-        //public async Task<bool> DeleteUser(String email)
-        //{
-        //    var user = await _userManager.FindByEmailAsync(email);
-        //    if (user != null)
-        //    {
-        //        user.Status = "Inactive";
-        //        return true;
-        //    }
-        //    return false;
-
-        //}
-        private static string RandomPassword(int length)
+        public async Task<bool> DeleteUser(String email)
         {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-              .Select(s => s[random.Next(s.Length)]).ToArray()) + "a99";
+            var user = await _dbContext.Users.FirstOrDefaultAsync(acc => acc.Email == email);
+            if (user != null)
+            {
+                user.Status = "Inactive";
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            return false;
+
         }
     }
 }

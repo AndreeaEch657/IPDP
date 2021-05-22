@@ -1,14 +1,14 @@
 ﻿using System;
+using Microsoft.AspNetCore.Http;
 
 namespace CyberShop.Domain.Models.Infrastructure
 {
     public class ShopItemImageDM
     {
         
-        public Guid ImageId { get; set; }
-        public byte[] Image { get; set; }
-
-        public Guid ShopItemId { get; set; }
+        public long ImageId { get; set; }
+        public string ImagePath { get; set; }
+        public long ShopItemId { get; set; }
       
     }
 }

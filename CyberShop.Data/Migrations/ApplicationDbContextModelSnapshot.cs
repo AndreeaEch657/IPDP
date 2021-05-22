@@ -72,6 +72,9 @@ namespace CyberShop.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -94,10 +97,11 @@ namespace CyberShop.Data.Migrations
 
             modelBuilder.Entity("CyberShop.Data.EFModels.ShopItem", b =>
                 {
-                    b.Property<Guid>("ShopItemId")
+                    b.Property<long>("ShopItemId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("shop_item_id");
+                        .HasColumnType("bigint")
+                        .HasColumnName("shop_item_id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Category")
                         .HasColumnType("nvarchar(max)")
@@ -122,17 +126,18 @@ namespace CyberShop.Data.Migrations
 
             modelBuilder.Entity("CyberShop.Data.EFModels.ShopItemImage", b =>
                 {
-                    b.Property<Guid>("ImageId")
+                    b.Property<long>("ImageId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("image_id");
+                        .HasColumnType("bigint")
+                        .HasColumnName("image_id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)")
-                        .HasColumnName("image");
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("image_path");
 
-                    b.Property<Guid>("ShopItemId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<long>("ShopItemId")
+                        .HasColumnType("bigint")
                         .HasColumnName("shop_item_id");
 
                     b.HasKey("ImageId");

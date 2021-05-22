@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -15,6 +16,7 @@ using CyberShop.Data.DBContext;
 using CyberShop.Data.EFModels;
 using CyberShop.Domain.Logic.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 
 namespace CyberShop.Web
@@ -106,6 +108,11 @@ namespace CyberShop.Web
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            //app.UseStaticFiles(new StaticFileOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath,"wwwroot","Images")),
+            //    RequestPath = "/Images"
+            //});
 
             app.UseRouting();
             app.UseAuthentication();
