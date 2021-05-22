@@ -50,21 +50,31 @@ namespace CyberShop.Web.Controllers.Admin
             }
             return BadRequest();
         }
-        [HttpPost]
-        public async Task<IActionResult> AddShopItemImage([FromForm] ShopItemImageDTO model)
-        {
 
-            string subPath = "./wwwroot/Images/" + model.ShopItemId;
+        private async Task<string> SaveImage(IFormFile imgFile, long shopItemId)
+        {
+            string subPath = "./wwwroot/Images/" + shopItemId;
             bool exists = System.IO.Directory.Exists(subPath);
 
             if (!exists)
                 System.IO.Directory.CreateDirectory(subPath);
-            string imageName = model.Image.FileName + DateTime.Now.ToString("yymmssfff");
-            var imagePath = subPath + "/" + model.Image.FileName;
+            string imageName = imgFile.FileName + DateTime.Now.ToString("yymmssfff");
+            var imagePath = subPath + "/" + imgFile.FileName;
             using (var fileStream = new FileStream(imagePath, FileMode.Create))
             {
-                await model.Image.CopyToAsync(fileStream);
+                await imgFile.CopyToAsync(fileStream);
             }
+
+            return imagePath;
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddShopItemImage([FromForm] ShopItemImageDTO model)
+        {
+
+            string imagePath = await SaveImage(model.Image, model.ShopItemId);
+            imagePath = imagePath.Replace("wwwroot/", "");
+            imagePath = imagePath.Remove(0, 1);
+
             if (ModelState.IsValid)
             {
                 ShopItemImageDM data = new ShopItemImageDM
@@ -78,15 +88,11 @@ namespace CyberShop.Web.Controllers.Admin
 
             return BadRequest();
         }
-
-        public async Task<IEnumerable<ShopItemImageDM>> GetShopItemImages([FromBody] long model)
+        [HttpGet]
+        public async Task<IEnumerable<CompleteShopItem>> GetCompleteShopItems()
         {
-            if (ModelState.IsValid)
-            {
-                return await _shopItemService.GetImagesForItem(model);
-            }
-
-            return null;
+            return await _shopItemService.GetCompleteShopItems();
         }
+
     }
 }

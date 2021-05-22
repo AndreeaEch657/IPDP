@@ -34,9 +34,9 @@ namespace CyberShop.Domain.Logic.Services
             }).ToListAsync();
         }
 
-        public async Task<IEnumerable<ShopItemImageDM>> GetImagesForItem(long shopItemId)
+        public async Task<ShopItemImageDM> GetImageForItem(long shopItemId)
         {
-            return await _ctx.ShopItemImages
+            var list =  await _ctx.ShopItemImages
                 .Where(s => s.ShopItemId == shopItemId)
                 .Select(s => new ShopItemImageDM
                 {
@@ -44,6 +44,7 @@ namespace CyberShop.Domain.Logic.Services
                     ImageId = s.ImageId,
                     ShopItemId = s.ShopItemId
                 }).ToListAsync();
+            return list[0];
         }
 
         public async Task<long> AddShopItem(ShopItemDM model)
@@ -73,5 +74,29 @@ namespace CyberShop.Domain.Logic.Services
             await _ctx.SaveChangesAsync();
             return model.ShopItemId;
         }
+
+        public async Task<IEnumerable<CompleteShopItem>> GetCompleteShopItems()
+        {
+            var shopItems = await GetAllShopItems();
+            List<CompleteShopItem> shopItemsList = new List<CompleteShopItem>();
+            foreach (var shopItem in shopItems)
+            {
+
+                shopItemsList.Add(new CompleteShopItem
+                {
+                    ShopItemId = shopItem.ShopItemId,
+                    Category =  shopItem.Category,
+                    Description =  shopItem.Description,
+                    Price = shopItem.Price,
+                    Title = shopItem.Title,
+                    ImagePath = (await GetImageForItem(shopItem.ShopItemId)).ImagePath
+                });
+            }
+
+            return shopItemsList;
+
+        } 
+
+
     }
 }

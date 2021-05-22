@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import AdminPage from "./Areas/Admin/AdminPage";
 
 
-const HomeAsync = React.lazy(() => import('../UI/Areas/Home/HomePage'));
+const HomeAsync = React.lazy(() => import('./Areas/Home/HomePage'));
 //const ShopAsync = React.lazy(() => import('../UI/Areas/Shop/ShopPage'));
 //const AdminAsync = React.lazy(() => import('../UI/Areas/Admin/AdminPage'));
 //const ContactFormAsync = React.lazy(() => import('../UI/Areas/Home/ContactForm'));
