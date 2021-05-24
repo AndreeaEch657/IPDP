@@ -32,9 +32,10 @@ namespace CyberShop.Domain.Logic.Services
                 ShopItemId = s.ShopItemId,
                 Title = s.Title
             }).ToListAsync();
+            
         }
 
-        public async Task<ShopItemImageDM> GetImageForItem(long shopItemId)
+        public async Task<String> GetImagePathForItem(long shopItemId)
         {
             var list =  await _ctx.ShopItemImages
                 .Where(s => s.ShopItemId == shopItemId)
@@ -44,7 +45,9 @@ namespace CyberShop.Domain.Logic.Services
                     ImageId = s.ImageId,
                     ShopItemId = s.ShopItemId
                 }).ToListAsync();
-            return list[0];
+
+            return list.Count > 0 ? list[0].ImagePath : "";
+            
         }
 
         public async Task<long> AddShopItem(ShopItemDM model)
@@ -82,6 +85,8 @@ namespace CyberShop.Domain.Logic.Services
             foreach (var shopItem in shopItems)
             {
 
+                var imagePath = (await GetImagePathForItem(shopItem.ShopItemId));
+
                 shopItemsList.Add(new CompleteShopItem
                 {
                     ShopItemId = shopItem.ShopItemId,
@@ -89,7 +94,7 @@ namespace CyberShop.Domain.Logic.Services
                     Description =  shopItem.Description,
                     Price = shopItem.Price,
                     Title = shopItem.Title,
-                    ImagePath = (await GetImageForItem(shopItem.ShopItemId)).ImagePath
+                    ImagePath = imagePath 
                 });
             }
 

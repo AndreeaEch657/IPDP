@@ -155,6 +155,7 @@ export const Register: React.FunctionComponent<any> = () => {
                 AccountService.register(data)
                     .then((resp) => {
                         console.log(resp);
+                        window.location.href = "/Account/Login";
                     })
                     .catch((e) =>{
                         console.log(e)

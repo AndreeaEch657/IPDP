@@ -15,3 +15,4 @@ namespace CyberShop.Domain.Models.Infrastructure
 
     }
 }
+
