@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using CyberShop.Data.DBContext;
 using CyberShop.Data.EFModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -22,18 +23,27 @@ namespace CyberShop.Web.Controllers
         private readonly ILogger<AccountController> _logger;
         private readonly IHttpClientFactory _clientFactory;
         private readonly UserService _userService;
+        private readonly ApplicationDbContext _ctx;
 
         public AccountController(SignInManager<AppUser> signInManager,
             UserManager<AppUser> userManager,
             ILogger<AccountController> logger,
             IHttpClientFactory clientFactory,
-            UserService userService)
+            UserService userService, ApplicationDbContext ctx)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _clientFactory = clientFactory;
             _userService = userService;
+            _ctx = ctx;
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<Boolean> IsUserAdmin()
+        {
+            return User.IsInRole("Admin");
 
         }
 

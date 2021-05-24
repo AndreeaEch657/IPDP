@@ -42,6 +42,15 @@ export default class AccountService {
             .post(`${AccountService.BASE_URL}/Register`, data)
     }
 
+    static checkUser = () : Promise<any> => {
+        return AppHTTPClient.get(`${AccountService.BASE_URL}/IsUserAdmin`);
+    }
+
+    static logout = (): Promise<any> => {
+        return AppHTTPClient
+            .post(`${AccountService.BASE_URL}/Logout`);
+    }
+
 
 
 }

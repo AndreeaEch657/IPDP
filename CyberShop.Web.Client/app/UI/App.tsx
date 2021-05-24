@@ -7,9 +7,21 @@ import {
     Link
 } from "react-router-dom";
 import { withMuiTheme } from "./withMuiTheme";
+import AccountService from "../Services/AccountService";
 
 const App: React.FunctionComponent<{}> = () => {
     const classes = useStyles();
+    const [isUserAdmin, setIsUserAdmin] = React.useState(false);
+    React.useEffect(() =>{
+        AccountService.checkUser()
+            .then((resp) =>{
+                setIsUserAdmin(resp.data)
+            })
+            .catch((err) =>{
+                console.log(err)
+            })
+
+    },[]) 
 
     return (
         <Router>
@@ -25,26 +37,37 @@ const App: React.FunctionComponent<{}> = () => {
                                 </Grid>
                                 <Grid item xs={5} sm={4} md={4} lg={8}>
                                 </Grid>
-                                <Grid item xs={2} sm={2} md={2} lg={1}>
+
+                                {isUserAdmin && <Grid item xs={2} sm={2} md={2} lg={1}>
                                     <Button
                                         color="inherit"
                                     >
                                         <Link to="/web/admin" className={classes.links} >Admin</Link>
+                                    </Button>
+                                </Grid>  }
+                                              
+                                <Grid item xs={2} sm={2} md={2} lg={1}>
+                                    <Button
+                                        color="inherit"
+                                    >
+                                        <Link to="/web/shop" className={classes.links} >Shop</Link>
                                     </Button>
                                 </Grid>
 
                                 <Grid item xs={2} sm={2} md={2} lg={1}>
                                     <Button
                                         color="inherit"
+                                        onClick={() => {
+                                            AccountService.logout()
+                                                .then(() => {
+                                                    
+                                                })
+                                                .finally(() =>{
+                                                    window.location.reload();
+                                                })
+                                        }}
                                     >
-                                        <Link to="/web/shopadmin" className={classes.links} >Admin Shop</Link>
-                                    </Button>
-                                </Grid>
-                                <Grid item xs={2} sm={2} md={2} lg={1}>
-                                    <Button
-                                        color="inherit"
-                                    >
-                                        <Link to="/web/shop" className={classes.links} >Shop</Link>
+                                        Logout
                                     </Button>
                                 </Grid>
 
