@@ -19,7 +19,7 @@ namespace CyberShop.Web.Controllers
 
         }
         [Route("")]
-        [Route("web/{*par}")]
+        [Route("/{*par}")]
 
         public IActionResult Index()
         {

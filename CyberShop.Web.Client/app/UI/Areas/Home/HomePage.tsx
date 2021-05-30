@@ -1,12 +1,14 @@
-import { Badge, Drawer, Grid, LinearProgress } from '@material-ui/core';
-import * as React from 'react';
+import { Badge, Drawer, Grid, LinearProgress } from "@material-ui/core";
+import * as React from "react"
 import { useEffect, useState } from "react";
 import { CompleteShopItem } from "../../../Models/CompleteShopItem";
 import ShopItemsService from "../../../Services/ShopItemsService";
-import Cart from './Cart/Cart';
-import { StyledButton, Wrapper } from './Home.styles';
+import Cart from "./Cart/Cart";
+import { StyledButton, Wrapper } from "./Home.styles";
+import Item from "./Item/Item";
+
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import Item from './Item/Item';
+
 
 
 export interface ICartItem extends CompleteShopItem{
@@ -16,21 +18,33 @@ export interface ICartItem extends CompleteShopItem{
 }
 const HomePage: React.FunctionComponent<{}> = () => {
     const [cartOpen, setCartOpen] = useState(false);
-    const [cartItems, setCartItems] = useState([] as ICartItem[]);
+    const [cartItems, setCartItems] = useState<ICartItem[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
     const [completShopItems, setCompleteShopItems] = useState<ICartItem[]>([]);
 
     useEffect(() => {
         setIsLoading(true);
+        setCartItems(JSON.parse(localStorage.getItem("cartItems")) ? JSON.parse(localStorage.getItem("cartItems")) as any : []);
+        console.log(JSON.parse(localStorage.getItem("cartItems")));
+
         ShopItemsService.getCompleteShopItems().
 		then((resp) => {
 			setCompleteShopItems(resp.data);
+            console.log(resp.data);
         })
         .finally(() =>{
             setIsLoading(false);
-        });
+        })
+        
+        ;
     }, []);
+
+
+    useEffect(()=>{
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+    },[cartItems])
 
     const handleAddToCart = (clickedItem: ICartItem) => {
         setCartItems((prev) => {
@@ -49,6 +63,7 @@ const HomePage: React.FunctionComponent<{}> = () => {
             // First time the item is added
             return [...prev, { ...clickedItem, amount: 1 }];
         });
+         
     };
 
 
@@ -90,9 +105,9 @@ const HomePage: React.FunctionComponent<{}> = () => {
                     <AddShoppingCartIcon />
                 </Badge>
             </StyledButton>
-            <Grid container spacing={5}>
+            <Grid container spacing={3}>
                 {completShopItems?.map((item) => (
-                    <Grid item key={item.shopItemId} xs={12} sm={4}>
+                    <Grid item key={item.shopItemId} xs={12} sm={3}>
                         <Item item={item} handleAddToCart={handleAddToCart} />
                     </Grid>
                 ))}

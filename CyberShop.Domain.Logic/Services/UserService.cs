@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CyberShop.Domain.Logic.Services
 {
-    public class UserService
+    public class UserService 
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly ILogger<UserService> _logger;
