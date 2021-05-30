@@ -1,8 +1,11 @@
 import  { FunctionComponent, Suspense } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import * as React from 'react'
-import { QueryClient, QueryClientProvider } from "react-query";
 import AdminPage from "./Areas/Admin/AdminPage";
+import HomePage from "./Areas/Home/HomePage";
+import {Checkout} from "./Areas/Home/Checkout/CheckoutForm";
+import { OrdersPage } from "./Areas/Orders/OrdersPage";
+import { OrderDashboard } from "./Areas/Orders/OrderDashboard";
 
 
 const HomeAsync = React.lazy(() => import('./Areas/Home/HomePage'));
@@ -14,24 +17,23 @@ const HomeAsync = React.lazy(() => import('./Areas/Home/HomePage'));
 
 
 export const Routes: React.FunctionComponent<{}> = () => {
-    const client = new QueryClient();
     return (
         <Suspense fallback={<div>Loading...</div>}>
             <Switch>
                 <Route exact path="/">
-                    <Redirect push to={`/web/home`}></Redirect>
+                    <Redirect push to={`/home`}></Redirect>
                 </Route>
-                <Route path="/web/home">
-                     <QueryClientProvider client={client}>
-                        <HomeAsync />
-                    </QueryClientProvider>,
+                <Route path="/home">
+                        <HomePage />
                 </Route>
-                <Route path="/web/shop">
-                    <div>
-                        Shop
-                    </div>
+                <Route path="/checkout">
+                     <Checkout />
                 </Route>
-                <Route path="/web/admin">
+                <Route path="/orders">
+                     <OrderDashboard />
+                </Route>
+
+                <Route path="/admin">
                     <div>
                         <AdminPage/>
                     </div>
@@ -39,7 +41,7 @@ export const Routes: React.FunctionComponent<{}> = () => {
                 {/* <Route path="/web/contact">
                     <ContactFormAsync />
                 </Route> */}
-                <Route path="/web/shopadmin">
+                <Route path="/shopadmin">
                     <div>
                         Shop
                         </div>

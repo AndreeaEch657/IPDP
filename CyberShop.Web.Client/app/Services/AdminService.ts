@@ -32,10 +32,7 @@ export default class AdminService {
             .get(`${AdminService.BASE_URL}/GetUsers`)
     }
 
-    static logout = (): Promise<any> => {
-        return AppHTTPClient
-            .post(`${AdminService.BASE_URL}/Logout`);
-    }
+  
 
 
 

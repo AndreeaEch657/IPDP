@@ -35,6 +35,7 @@ namespace CyberShop.Web
         {
             services.AddScoped<UserService>();
             services.AddTransient<ShopItemService>();
+            services.AddTransient<TransactionService>();
 
             services.AddControllersWithViews();
 

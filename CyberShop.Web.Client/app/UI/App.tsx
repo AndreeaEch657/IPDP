@@ -31,7 +31,7 @@ const App: React.FunctionComponent<{}> = () => {
                         <Toolbar>
                             <Grid container spacing={3} alignItems={"center"}>
                                 <Grid item xs={1} sm={1} md={2} lg={1}>
-                                    <Link to="/web/home">
+                                    <Link to="/home">
                                         <img className={classes.img} alt="icon" src="../img/logo.png" />
                                     </Link>
                                 </Grid>
@@ -42,7 +42,7 @@ const App: React.FunctionComponent<{}> = () => {
                                     <Button
                                         color="inherit"
                                     >
-                                        <Link to="/web/admin" className={classes.links} >Admin</Link>
+                                        <Link to="/admin" className={classes.links} >Admin</Link>
                                     </Button>
                                 </Grid>  }
                                               
@@ -50,7 +50,7 @@ const App: React.FunctionComponent<{}> = () => {
                                     <Button
                                         color="inherit"
                                     >
-                                        <Link to="/web/shop" className={classes.links} >Shop</Link>
+                                        <Link to="/orders" className={classes.links} >My orders</Link>
                                     </Button>
                                 </Grid>
 
@@ -58,6 +58,7 @@ const App: React.FunctionComponent<{}> = () => {
                                     <Button
                                         color="inherit"
                                         onClick={() => {
+                                            localStorage.removeItem("cartItems");
                                             AccountService.logout()
                                                 .then(() => {
                                                     

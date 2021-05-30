@@ -19,7 +19,7 @@ using Microsoft.Extensions.Options;
 namespace EYHF.Web.Controllers.Api
 {
     [Authorize(Roles = "Admin")]
-    public class UserAdminController : BaseApiController
+    public class UserAdminController : Controller
     {
         private readonly UserService _userService;
         private readonly ILogger<UserAdminController> _logger;

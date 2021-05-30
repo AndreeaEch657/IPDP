@@ -18,6 +18,10 @@ namespace CyberShop.Data.DBContext
         }
         public DbSet<ShopItem> ShopItems { get; set; }
         public DbSet<ShopItemImage> ShopItemImages { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
 
 
@@ -27,6 +31,10 @@ namespace CyberShop.Data.DBContext
             builder.ApplyConfiguration(new AppUserConfiguration());
             builder.ApplyConfiguration(new ShopItemConfiguration());
             builder.ApplyConfiguration(new ShopItemImageConfiguration());
+            builder.ApplyConfiguration(new CartConfiguration());
+            builder.ApplyConfiguration(new CartItemConfiguration());
+            builder.ApplyConfiguration(new OrderConfiguration());
+            builder.ApplyConfiguration(new TransactionConfiguration());
         }
     }
 }

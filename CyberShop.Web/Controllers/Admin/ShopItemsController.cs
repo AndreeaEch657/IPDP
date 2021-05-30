@@ -11,15 +11,16 @@ using CyberShop.Domain.Models.Infrastructure;
 using CyberShop.Web.Models.Infrastrucutre;
 using System.Net.Http;
 using CyberShop.Web.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 
 namespace CyberShop.Web.Controllers.Admin
 {
     //[Route("api/ShopItems")]
-    
+    [Authorize(Roles = "Admin")]
     public class ShopItemsController : Controller
     {
-        private ShopItemService _shopItemService;
+        private readonly ShopItemService _shopItemService;
         private readonly IWebHostEnvironment _hostEnvironment;
 
         public ShopItemsController(ShopItemService shopItemService, IWebHostEnvironment hostEnvironment)
@@ -29,6 +30,7 @@ namespace CyberShop.Web.Controllers.Admin
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IEnumerable<ShopItemDM>> GetShopItems()
         {
             return await _shopItemService.GetAllShopItems();
@@ -45,6 +47,27 @@ namespace CyberShop.Web.Controllers.Admin
                     Price = model.Price,
                     Title = model.Title
                 });
+
+                return Ok();
+            }
+            return BadRequest();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddShopItems([FromBody] List<ShopItemDTO> models)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var model in models)
+                {
+                    await _shopItemService.AddShopItem(new ShopItemDM
+                    {
+                        Category = model.Category,
+                        Description = model.Description,
+                        Price = model.Price,
+                        Title = model.Title
+                    });
+                }
+                
 
                 return Ok();
             }
@@ -89,6 +112,7 @@ namespace CyberShop.Web.Controllers.Admin
             return BadRequest();
         }
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IEnumerable<CompleteShopItem>> GetCompleteShopItems()
         {
             return await _shopItemService.GetCompleteShopItems();

@@ -74,6 +74,7 @@ namespace CyberShop.Web.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
 
@@ -125,7 +126,6 @@ namespace CyberShop.Web.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public IEnumerable<AppUserDM> GetUsers()
         {
             return _userService.GetUsers();
