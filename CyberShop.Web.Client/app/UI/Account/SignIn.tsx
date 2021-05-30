@@ -26,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
             margin: 5 | theme.spacing(2)
         },
     },
+
+    mainContainer: {
+        marginTop: "60px"
+    }
 }));
 
 
@@ -191,7 +195,7 @@ export const SignIn: React.FunctionComponent<any> = () => {
     return (
 
 
-        <Container maxWidth="xs">
+        <Container maxWidth="xs" className={classes.mainContainer}>
             <CssBaseline />
             <div>
                 {/* <Avatar >

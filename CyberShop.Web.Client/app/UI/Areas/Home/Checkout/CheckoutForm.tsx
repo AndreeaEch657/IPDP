@@ -13,7 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { AddressForm } from "./AddressForm";
 import { PaymentForm } from "./PaymentForm";
 import { Review } from "./Review";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ICartItem } from "../HomePage";
 import TransactionService from "../../../../Services/TransactionService";
 
@@ -22,7 +22,7 @@ function Copyright() {
         <Typography variant="body2" color="textSecondary" align="center">
             {"Copyright © "}
             <Link color="inherit" href="https://material-ui.com/">
-                Your Website
+                Cyberhop
             </Link>{" "}
             {new Date().getFullYear()}
             {"."}
@@ -127,7 +127,10 @@ export const Checkout: React.FunctionComponent<{}> = () => {
         
     };
 
-    React.useEffect(() =>{
+   useEffect(() =>{
+        if((JSON.parse(localStorage.getItem("cartItems")).length == 0)){
+            window.location.assign("/");
+        }
         setCartItems(JSON.parse(localStorage.getItem("cartItems")) ? JSON.parse(localStorage.getItem("cartItems")) as any : []);
       }, [])
 

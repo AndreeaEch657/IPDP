@@ -9,5 +9,6 @@ namespace CyberShop.Domain.Models.Infrastructure
         public DateTime Date { get; set; }
         public String Status { get; set; }
         public double Total { get; set; }
+        public string Address { get; set; }
     }
 }

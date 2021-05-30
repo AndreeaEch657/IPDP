@@ -39,6 +39,10 @@ namespace CyberShop.Web.Controllers.Dashboard
         [HttpGet]
         public async Task<IEnumerable<UserOrderDM>> GetUserOrders()
         {
+            if (User.IsInRole("Admin"))
+            {
+                return await _transactionService.GetAdminDetailedOrders();
+            }
             return await _transactionService.GetUserDetailedOrders(CurrentUserID);
         }
 

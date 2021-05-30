@@ -26,7 +26,8 @@ namespace CyberShop.Domain.Logic.Services
                 OrderId = s.OrderId,
                 UserId = s.UserId,
                 Status = s.Status,
-                TransactionId = s.TransactionId
+                TransactionId = s.TransactionId,
+                Address = s.Address
             }).ToListAsync();
 
         }
@@ -40,7 +41,9 @@ namespace CyberShop.Domain.Logic.Services
                     OrderId = s.OrderId,
                     UserId = s.UserId,
                     Status = s.Status,
-                    TransactionId = s.TransactionId
+                    TransactionId = s.TransactionId,
+                    Address = s.Address
+
                 }).ToListAsync();
         }
 
@@ -59,7 +62,9 @@ namespace CyberShop.Domain.Logic.Services
                     OrderId = order.OrderId,
                     Date = date,
                     Status = order.Status,
-                    Total = total
+                    Total = total,
+                    Address = order.Address
+                    
                 });
             }
 
@@ -84,7 +89,9 @@ namespace CyberShop.Domain.Logic.Services
                     OrderId = order.OrderId,
                     Date = date,
                     Status = order.Status,
-                    Total = total
+                    Total = total,
+                    Address = order.Address
+
                 });
             }
 
@@ -183,7 +190,8 @@ namespace CyberShop.Domain.Logic.Services
                         {
                             Amount = item.NumberOfItems,
                             ImagePath = imagePath,
-                            TiTle = shopItem.Title
+                            Title = shopItem.Title,
+                            Price = shopItem.Price
 
                         });
                     }

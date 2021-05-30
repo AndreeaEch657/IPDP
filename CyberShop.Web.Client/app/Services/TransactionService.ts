@@ -8,5 +8,19 @@ export default class TransactionService {
             .post(`${TransactionService.BASE_URL}/CreateOrder`, data)
     }
 
+    static getUserOrders = () : Promise<any> =>{
+        return AppHTTPClient
+            .get(`${TransactionService.BASE_URL}/GetUserOrders`);
+    }
+    static getAdminOrders = () : Promise<any> =>{
+        return AppHTTPClient
+            .get(`${TransactionService.BASE_URL}/GetAdminOrders`);
+    }
+
+    static getOrderItems = (orderId) : Promise<any> =>{
+        return AppHTTPClient
+            .get(`${TransactionService.BASE_URL}/GetOrderItems/${orderId}`);
+    }
+
 
 }

@@ -4,6 +4,8 @@ import * as React from 'react'
 import AdminPage from "./Areas/Admin/AdminPage";
 import HomePage from "./Areas/Home/HomePage";
 import {Checkout} from "./Areas/Home/Checkout/CheckoutForm";
+import { OrdersPage } from "./Areas/Orders/OrdersPage";
+import { OrderDashboard } from "./Areas/Orders/OrderDashboard";
 
 
 const HomeAsync = React.lazy(() => import('./Areas/Home/HomePage'));
@@ -25,11 +27,12 @@ export const Routes: React.FunctionComponent<{}> = () => {
                         <HomePage />
                 </Route>
                 <Route path="/checkout">
-    
-                        <Checkout />
-       
+                     <Checkout />
                 </Route>
-                
+                <Route path="/orders">
+                     <OrderDashboard />
+                </Route>
+
                 <Route path="/admin">
                     <div>
                         <AdminPage/>

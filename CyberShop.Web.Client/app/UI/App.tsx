@@ -50,7 +50,7 @@ const App: React.FunctionComponent<{}> = () => {
                                     <Button
                                         color="inherit"
                                     >
-                                        <Link to="/shop" className={classes.links} >Shop</Link>
+                                        <Link to="/orders" className={classes.links} >My orders</Link>
                                     </Button>
                                 </Grid>
 

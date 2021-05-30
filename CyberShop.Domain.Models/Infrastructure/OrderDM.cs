@@ -7,6 +7,7 @@
 
         public string Status { get; set; }
         public long TransactionId { get; set; }
+        public string Address { get; set; }
 
     }
 }
