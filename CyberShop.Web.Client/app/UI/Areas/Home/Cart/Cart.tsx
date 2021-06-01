@@ -33,7 +33,7 @@ const Cart: React.FC<CartProps> = ({ cartItems, addToCart, removeFromCart }) => 
           removeFromCart={removeFromCart}
         />
       ))}
-      <h2>Total: {calculateTotal(cartItems).toFixed(2)}</h2>
+      <h2>Total: {calculateTotal(cartItems).toFixed(2)} RON</h2>
       {cartItems.length === 0 ? null : <Button><Link to="/checkout">Proceed to checkout </Link></Button>}
 
       
