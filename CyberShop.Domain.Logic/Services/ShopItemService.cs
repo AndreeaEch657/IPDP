@@ -32,6 +32,7 @@ namespace CyberShop.Domain.Logic.Services
                 ShopItemId = s.ShopItemId,
                 Title = s.Title
             }).ToListAsync();
+
             
         }
 
