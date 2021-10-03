@@ -73,7 +73,7 @@ export const Review:React.FunctionComponent<ReviewProps> = (props) => {
         <ListItem className={classes.listItem}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" className={classes.total}>
-            ${calculateTotal(cartItems).toFixed(2)}
+            {calculateTotal(cartItems).toFixed(2)} RON
           </Typography>
         </ListItem>
       </List>

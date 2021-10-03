@@ -53,10 +53,6 @@
     <Folder Include="app\UI\Areas\Home\Cart\" />
     <Folder Include="app\UI\Areas\Home\Checkout\" />
     <Folder Include="app\UI\Areas\Home\Item\" />
-    <Folder Include="app\UI\Areas\Main\" />
-    <Folder Include="app\UI\Areas\Main\CartItem\" />
-    <Folder Include="app\UI\Areas\Main\Cart\" />
-    <Folder Include="app\UI\Areas\Main\Item\" />
     <Folder Include="app\UI\Areas\Orders\" />
     <Folder Include="app\UI\Shared\" />
     <Folder Include="app\Utility\" />
@@ -95,15 +91,6 @@
     <TypeScriptCompile Include="app\UI\Areas\Home\HomePage.tsx" />
     <TypeScriptCompile Include="app\UI\Areas\Home\Item\Item.styles.ts" />
     <TypeScriptCompile Include="app\UI\Areas\Home\Item\Item.tsx" />
-    <TypeScriptCompile Include="app\UI\Areas\Main\App.styles.ts" />
-    <TypeScriptCompile Include="app\UI\Areas\Main\App.tsx" />
-    <TypeScriptCompile Include="app\UI\Areas\Main\CartItem\CartItem.styles.ts" />
-    <TypeScriptCompile Include="app\UI\Areas\Main\CartItem\CartItem.tsx" />
-    <TypeScriptCompile Include="app\UI\Areas\Main\Cart\Cart.styles.ts" />
-    <TypeScriptCompile Include="app\UI\Areas\Main\Cart\Cart.tsx" />
-    <TypeScriptCompile Include="app\UI\Areas\Main\index.tsx" />
-    <TypeScriptCompile Include="app\UI\Areas\Main\Item\Item.styles.ts" />
-    <TypeScriptCompile Include="app\UI\Areas\Main\Item\Item.tsx" />
     <TypeScriptCompile Include="app\UI\Areas\Orders\OrderItemsPage.tsx" />
     <TypeScriptCompile Include="app\UI\Areas\Orders\OrdersPage.tsx" />
     <TypeScriptCompile Include="app\UI\Routes.tsx" />
