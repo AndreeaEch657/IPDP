@@ -10,7 +10,7 @@ namespace CyberShop.Data.DBContext
     {
         public ApplicationDbContext CreateDbContext(string[] args)
         {
-            var connectionString = "Server=DESKTOP-DQNERQQ\\SQLEXPRESS;Database=CyberShop;Trusted_Connection=True;";
+            var connectionString = "Server=.;Database=CyberShop;Trusted_Connection=True;";
             var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
             builder.UseSqlServer(connectionString);
 

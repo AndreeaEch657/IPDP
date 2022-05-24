@@ -16,8 +16,9 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace CyberShop.Web.Controllers.Admin
 {
-    //[Route("api/ShopItems")]
-    [Authorize(Roles = "Admin")]
+    //[Route("ShopItems")]
+    //[Authorize(Roles = "Admin")]
+    [AllowAnonymous]
     public class ShopItemsController : Controller
     {
         private readonly ShopItemService _shopItemService;
@@ -36,6 +37,7 @@ namespace CyberShop.Web.Controllers.Admin
             return await _shopItemService.GetAllShopItems();
         }
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> AddShopItem([FromBody] ShopItemDTO model)
         {
             if (ModelState.IsValid)
